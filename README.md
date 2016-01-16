@@ -1,32 +1,28 @@
 # redis-cluster-dockerfile
+ Dockerfile to run a Redis Cluster.
+ 
+ CentOS 6.6, Redis 3.01
+ 
+ The cluster is 6 redis instances running with 3 master & 3 slaves, one slave for each master. They run on ports 7001 to 7006.
 
-系统是基于centos:6.6的，redis的版本是3.01
+### Installation
 
-通过Dockerfile创建redis cluster的image，然后通过创建的镜像批量的生成容器...
+1. Install [Docker](https://www.docker.com/).
 
-可以传递指定IP和端口
+2. Install the redis-cli. E.g. with following command in Ubuntu: `apt-get install redis-server`
 
-```
-docker build -t redis_cluster --rm .
+3. Download dockerfile: `https://github.com/raphapr/redis-cluster-dockerfile.git && cd redis-cluster-dockerfile`
 
-docker run -it --net=host redis_cluster 9000
+4. Build image:: `docker build -t "redis_cluster" .`
 
-#for daemon
+### Usage
 
-docker run -d --net=host redis_cluster 9000
+#### Run `redis-server`
+    
+    docker run -d --net=host redis_cluster 7000
+    
+Add how many you want.
 
-docker run -it --name=redis_9000 --net=host redis_cluster 9000
+#### Create the cluster automatically
 
-OR
-
-docker run -it --net=host redis_cluster 9000 10.10.32.88
-
-
-docker exec -it redis_9000 bash
-
-
-
-for i in {9000..9007};do
-    docker run -d --name=redis_$i --net=host redis_cluster $i
-done
-```
+    ./create_cluster.sh

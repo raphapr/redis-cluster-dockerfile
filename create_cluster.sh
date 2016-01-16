@@ -15,7 +15,6 @@ redis-cli -p 7001 cluster meet 127.0.0.1 7004
 redis-cli -p 7001 cluster meet 127.0.0.1 7005
 redis-cli -p 7001 cluster meet 127.0.0.1 7006
 
-for i in `seq 4 6`;
-do
-        redis-cli -p 700$i CLUSTER REPLICATE $(redis-cli -p 7001 cluster nodes | grep myself | cut -d " " -f1)
-done  
+redis-cli -p 7004 CLUSTER REPLICATE $(redis-cli -p 7001 cluster nodes | grep myself | cut -d " " -f1)
+redis-cli -p 7005 CLUSTER REPLICATE $(redis-cli -p 7002 cluster nodes | grep myself | cut -d " " -f1)
+redis-cli -p 7006 CLUSTER REPLICATE $(redis-cli -p 7003 cluster nodes | grep myself | cut -d " " -f1)
