@@ -2,7 +2,7 @@
 
 for i in `seq 1 6`;
 do
-	docker run -d --net=host teste 700$i
+	docker run -d --net=host redis_cluster 700$i
 done  
 
 redis-cli -p 7001 cluster addslots {0..5500}
