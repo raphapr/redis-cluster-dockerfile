@@ -1,7 +1,6 @@
 #!/bin/bash
 cd /app/redis
 redis_port=$1
-echo $redis_port
 cd /app/redis
 if [ -n $2 ];then
     ip=$2 
