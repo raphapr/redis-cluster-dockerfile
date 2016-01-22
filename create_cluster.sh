@@ -1,19 +1,24 @@
 #!/bin/bash
 
-for i in `seq 1 6`;
-do
-	docker run -d --net=host redis_cluster 700$i
-done  
+public_ip=$(curl -s http://whatismijnip.nl |cut -d " " -f 5)
+
+if [ -n $1 ];then
+	for i in `seq 1 6`;
+	do
+		docker run -d --net=host redis_cluster 700$i $1
+	done  
+fi
+
 
 redis-cli -p 7001 cluster addslots {0..5500}
 redis-cli -p 7002 cluster addslots {5501..11000}
 redis-cli -p 7003 cluster addslots {11001..16383}
 
-redis-cli -p 7001 cluster meet 127.0.0.1 7002
-redis-cli -p 7001 cluster meet 127.0.0.1 7003
-redis-cli -p 7001 cluster meet 127.0.0.1 7004
-redis-cli -p 7001 cluster meet 127.0.0.1 7005
-redis-cli -p 7001 cluster meet 127.0.0.1 7006
+redis-cli -p 7001 cluster meet $public_ip 7002
+redis-cli -p 7001 cluster meet $public_ip 7003
+redis-cli -p 7001 cluster meet $public_ip 7004
+redis-cli -p 7001 cluster meet $public_ip 7005
+redis-cli -p 7001 cluster meet $public_ip 7006
 
 sleep 2
 
