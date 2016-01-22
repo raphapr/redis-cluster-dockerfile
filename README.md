@@ -21,10 +21,6 @@
     
     docker run -d --net=host redis_cluster 7000
     
-or
-
-    docker run -d --net=host redis_cluster 7000 192.168.1.2
-    
 Add how many you want.
 
 #### Create the cluster automatically
