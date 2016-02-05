@@ -3,7 +3,7 @@
  
  CentOS 6.6, Redis 3.01
  
- The cluster is 6 redis instances running with 3 master & 3 slaves, one slave for each master. They run on ports 7001 to 7006.
+ The cluster is 6 redis instances, used as a cache, running with 3 master & 3 slaves, one slave for each master. They run on ports 7001 to 7006.
 
 ### Installation
 

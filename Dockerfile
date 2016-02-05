@@ -34,5 +34,4 @@ RUN cd /app \
 ENV PORT 6379
 
 ENTRYPOINT ["/app/manage.sh"]
-#CMD ["/app/manage.sh"]
 CMD ["bash"]
